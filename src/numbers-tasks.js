@@ -104,8 +104,10 @@ function getLinearEquationRoot(a, b) {
  *   (0,-1) (1,0)    => π/2
  *   (0,1) (0,1)     => 0
  */
-function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  const dotProduct = x1 * x2 + y1 * y2;
+  const magnitudes = Math.hypot(x1, y1) * Math.hypot(x2, y2);
+  return Math.acos(dotProduct / magnitudes);
 }
 
 /**
@@ -223,8 +225,9 @@ function isPrime(n) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  const num = Number(value);
+  return Number.isNaN(num) ? def : num;
 }
 
 /**
@@ -238,8 +241,8 @@ function toNumber(/* value, def */) {
  *   -2 => -8
  *   0  => 0
  */
-function getCube(/* num */) {
-  throw new Error('Not implemented');
+function getCube(num) {
+  return num ** 3;
 }
 
 /**
@@ -255,8 +258,16 @@ function getCube(/* num */) {
  *   3  => 2
  *   10 => 55
  */
-function getFibonacciNumber(/* index */) {
-  throw new Error('Not implemented');
+function getFibonacciNumber(index) {
+  let n1 = 0;
+  let n2 = 1;
+  let n3;
+  for (let i = 1; i <= index; i += 1) {
+    n3 = n1 + n2;
+    n1 = n2;
+    n2 = n3;
+  }
+  return n1;
 }
 
 /**
@@ -270,8 +281,12 @@ function getFibonacciNumber(/* index */) {
  *   10 => 55 // (1+2+3+...+10)
  *   1  => 1
  */
-function getSumToN(/* n */) {
-  throw new Error('Not implemented');
+function getSumToN(n) {
+  let sum = 0;
+  for (let i = 1; i <= n; i += 1) {
+    sum += i;
+  }
+  return sum;
 }
 
 /**
@@ -285,8 +300,13 @@ function getSumToN(/* n */) {
  *   202 => 4  // (2+0+2)
  *   5   => 5  // 5
  */
-function getSumOfDigits(/* num */) {
-  throw new Error('Not implemented');
+function getSumOfDigits(num) {
+  const arr = String(num).split('');
+  let sum = 0;
+  for (let i = 0; i < arr.length; i += 1) {
+    sum += Number(arr[i]);
+  }
+  return sum;
 }
 
 /**
@@ -300,8 +320,15 @@ function getSumOfDigits(/* num */) {
  *   16  => true
  *   15  => false
  */
-function isPowerOfTwo(/* num */) {
-  throw new Error('Not implemented');
+function isPowerOfTwo(num) {
+  let n = num;
+  while (n !== 1) {
+    if (n % 2 !== 0) {
+      return false;
+    }
+    n /= 2;
+  }
+  return true;
 }
 
 /**
